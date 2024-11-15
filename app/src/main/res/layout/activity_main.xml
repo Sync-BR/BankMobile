@@ -7,33 +7,51 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical"
     android:gravity="center"
+    android:padding="@dimen/fab_margin"
+    android:background="@drawable/gradient_background"
     tools:context=".activity.MainActivity">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="377dp"
+        android:layout_height="199dp"
+        app:srcCompat="@drawable/ic_launcher_background"
+        android:layout_marginBottom="20dp"/>
+
     <EditText
         android:id="@+id/login_usuario"
         style="@style/TextAppearance.AppCompat.Title"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:hint="@string/usuario" />
+        android:background="@color/white"
+        android:hint="@string/usuario"
+        android:gravity="center"/>
     <EditText
         android:id="@+id/login_password"
+        android:layout_marginTop="10dp"
         style="@style/TextAppearance.AppCompat.Title"
         android:layout_width="match_parent"
         android:layout_height="48dp"
+        android:background="@color/white"
         android:inputType="textPassword"
-        android:hint="@string/senha"/>
+        android:hint="@string/senha"
+        android:gravity="center"/>
+
     <Button
         android:id="@+id/login_Button_Conectar"
-        style="@style/Widget.Design.BottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:background="@color/cardview_dark_background"
         android:layout_marginBottom="10dp"
         android:text="@string/conectar" />
 
     <Button
         android:id="@+id/login_Button_Cadastrar"
-        style="@style/Widget.Design.BottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/cardview_dark_background"
+        android:backgroundTint="@color/cardview_dark_background"
         android:text="@string/cadastrar" />
+
 </LinearLayout>

@@ -22,7 +22,6 @@ public class MainActivity extends AppCompatActivity implements Structure {
     private UsuriousService userService;
     private Button register, login;
     private EditText username, password;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +29,6 @@ public class MainActivity extends AppCompatActivity implements Structure {
         initializeUI();
         setupListeners();
     }
-
     @Override
     public void initializeUI() {
         userService = new UsuriousService(this);
@@ -39,33 +37,35 @@ public class MainActivity extends AppCompatActivity implements Structure {
         login = findViewById(R.id.login_Button_Conectar);
         register = findViewById(R.id.login_Button_Cadastrar);
     }
-
     @Override
     public void setupListeners() {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 disableButton();
-                LoginModel userLogin = new LoginModel(username.getText().toString(), password.getText().toString());
-                userService.authenticate(userLogin, new AuthCallBack() {
-                    @Override
-                    public void onAuthSuccess(String token) {
-                        Toast.makeText(MainActivity.this, "Usuário autenticado com sucesso!", Toast.LENGTH_SHORT).show();
-                        Log.d("Token: ", " do usuario " + token);
-                    }
+                if(checkAllFields()){
+                    LoginModel userLogin = new LoginModel(username.getText().toString(), password.getText().toString());
+                    userService.authenticate(userLogin, new AuthCallBack() {
+                        @Override
+                        public void onAuthSuccess(String token) {
+                            Toast.makeText(MainActivity.this, "Usuário autenticado com sucesso!", Toast.LENGTH_SHORT).show();
+                            Log.d("Token: ", " do usuario " + token);
+                        }
 
-                    @Override
-                    public void onAuthFailure() {
-                        enableButton();
-                        Toast.makeText(MainActivity.this, "Login ou senha incorretar! ", Toast.LENGTH_SHORT).show();
-                    }
+                        @Override
+                        public void onAuthFailure() {
+                            enableButton();
+                            Toast.makeText(MainActivity.this, "Login ou senha incorretar! ", Toast.LENGTH_SHORT).show();
+                        }
 
-                    @Override
-                    public void onServerFailure() {
-                        enableButton();
-                        Toast.makeText(MainActivity.this, "Erro no servidor! ", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                        @Override
+                        public void onServerFailure() {
+                            enableButton();
+                            Toast.makeText(MainActivity.this, "Erro no servidor! ", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+                enableButton();
             }
         });
         register.setOnClickListener(new View.OnClickListener() {
@@ -90,4 +90,18 @@ public class MainActivity extends AppCompatActivity implements Structure {
         register.setEnabled(true);
         login.setEnabled(true);
     }
+
+    private boolean checkAllFields() {
+        if (username.length() != 0) {
+            if (password.length() != 0) {
+                return true;
+            }
+            password.setError("Senha está vazia");
+            return  false;
+        }
+        username.setError("Usuário vazio");
+        return false;
+
+    }
+
 }

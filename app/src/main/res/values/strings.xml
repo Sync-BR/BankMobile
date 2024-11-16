@@ -47,4 +47,19 @@
     <string name="senha">Senha</string>
     <string name="conectar">Conectar</string>
     <string name="cadastrar">Cadastrar</string>
+    <string name="registername">Nome completo</string>
+    <string name="registerCpf">CPF\n</string>
+    <string name="registerAge">Idade</string>
+    <string name="registerEmail">Email</string>
+    <string name="registerTelephone">Telefone</string>
+    <string name="register_button_next">Próximo</string>
+    <string name="return_Screen">Retornar</string>
+    <string name="cep">Digite o cep</string>
+    <string name="cep_search">Buscar</string>
+    <string name="register_cep_road">Rua</string>
+    <string name="register_cep_neighborhood">Bairro</string>
+    <string name="register_cep_locality">Localidade</string>
+    <string name="register_cep_state">Estado</string>
+    <string name="register_cep_houseNumber">Número do ap</string>
+    <string name="register_cep_house_letter">Letra</string>
 </resources>

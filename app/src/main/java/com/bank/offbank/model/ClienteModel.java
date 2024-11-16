@@ -1,6 +1,8 @@
 package com.bank.offbank.model;
 
-public class ClienteModel {
+import java.io.Serializable;
+
+public class ClienteModel implements Serializable {
 
     private int id;
     private String name;
@@ -15,7 +17,19 @@ public class ClienteModel {
     private String photo;
     private LoginModel login;
 
-    public ClienteModel() {
+    public ClienteModel(String name, String cpf, int age, String email, String telephone, String sex) {
+        this.name = name;
+        this.cpf = cpf;
+        this.age = age;
+        this.email = email;
+        this.telephone = telephone;
+        this.sex = sex;
+    }
+
+    public ClienteModel(String cep, int houseNumber, char houseLetter) {
+        this.cep = cep;
+        this.houseNumber = houseNumber;
+        this.houseLetter = houseLetter;
     }
 
     @Override
@@ -35,6 +49,7 @@ public class ClienteModel {
                 ", login=" + login +
                 '}';
     }
+
 
     public int getId() {
         return id;

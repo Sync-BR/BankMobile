@@ -25,6 +25,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.register.RegisterActivity"/>
+        <activity android:name=".activity.register.RegisterAddress"/>
     </application>
 
 </manifest>

@@ -1,8 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/gradient_background"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="@dimen/fab_margin"
     tools:context=".activity.register.RegisterActivity">
 
+    <EditText
+        android:id="@+id/register_name"
+        style="@style/TextAppearance.AppCompat.Title"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/white"
+        android:gravity="center"
+        android:hint="@string/registername"
+        android:layout_marginBottom="5dp"/>
+
+    <EditText
+        android:id="@+id/register_cpf"
+        style="@style/TextAppearance.AppCompat.Title"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/white"
+        android:inputType="number"
+        android:gravity="center"
+        android:hint="@string/registerCpf"
+        android:layout_marginBottom="5dp"/>
+    <EditText
+        android:id="@+id/register_age"
+        style="@style/TextAppearance.AppCompat.Title"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/white"
+        android:inputType="number"
+        android:gravity="center"
+        android:hint="@string/registerAge"
+        android:layout_marginBottom="5dp"/>
+    <EditText
+        android:id="@+id/register_email"
+        style="@style/TextAppearance.AppCompat.Title"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/white"
+        android:gravity="center"
+        android:inputType="textEmailAddress"
+        android:hint="@string/registerEmail"
+        android:layout_marginBottom="5dp"/>
+    <EditText
+        android:id="@+id/register_telephone"
+        style="@style/TextAppearance.AppCompat.Title"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/white"
+        android:inputType="phone"
+        android:gravity="center"
+        android:hint="@string/registerTelephone"
+        android:layout_marginBottom="5dp"/>
+
+    <Spinner
+        android:id="@+id/register_sexo"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/white"
+        android:backgroundTint="@color/white"
+        android:spinnerMode="dropdown" />
+    <Button
+        android:id="@+id/register_next_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/cardview_dark_background"
+        android:backgroundTint="@color/cardview_dark_background"
+        android:text="@string/register_button_next"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="5dp"/>
+    <Button
+        android:id="@+id/returnScreen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/cardview_dark_background"
+        android:backgroundTint="@color/cardview_dark_background"
+        android:text="@string/return_Screen" />
 </LinearLayout>

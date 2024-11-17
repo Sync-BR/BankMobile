@@ -3,9 +3,11 @@ package com.bank.offbank.activity.register;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -48,24 +50,47 @@ public class RegisterAddress extends AppCompatActivity implements Structure {
 
     @Override
     public void setupListeners() {
+        buttonNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                disableButton();
+
+                if(cep.length() == 8){
+                    //Metado para buscar um cep e prencher os dados no form data
+                } else {
+                    enableButton();
+                    Toast.makeText(RegisterAddress.this, "Cep invalido!", Toast.LENGTH_SHORT).show();
+                    cep.setError("O Cep precisar conter 8 digitos");
+                }
+            }
+        });
+        buttonReturn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent screenReturn = new Intent(RegisterAddress.this, RegisterActivity.class);
+                screenReturn.putExtra("cliente", cliente);
+                startActivity(screenReturn);
+                finish();
+            }
+        });
 
     }
 
     @Override
     public void disableButton() {
+        buttonNext.setEnabled(false);
+        buttonReturn.setEnabled(false);
 
     }
 
     @Override
     public void enableButton() {
-
+        buttonNext.setEnabled(true);
+        buttonReturn.setEnabled(true);
     }
     private void getDateCliente(){
         Intent getDate = getIntent();
         this.cliente = (ClienteModel) getDate.getSerializableExtra("cliente");
     }
 
-    public ClienteModel getCliente() {
-        return cliente;
-    }
 }

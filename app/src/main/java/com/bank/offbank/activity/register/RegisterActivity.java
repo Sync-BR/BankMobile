@@ -2,6 +2,7 @@ package com.bank.offbank.activity.register;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -9,10 +10,12 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bank.offbank.R;
+import com.bank.offbank.activity.MainActivity;
 import com.bank.offbank.implementation.Structure;
 import com.bank.offbank.model.ClienteModel;
 
@@ -20,6 +23,29 @@ public class RegisterActivity extends AppCompatActivity implements Structure {
     private EditText name, cpf, age, email, telephone;
     private Button buttonNext, buttonReturn;
     private Spinner sex;
+    private ClienteModel dateCliente;
+
+    private boolean returnDate() {
+        Intent getDate = getIntent();
+        this.dateCliente = (ClienteModel) getDate.getSerializableExtra("cliente");
+        if (dateCliente != null) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (returnDate()) {
+            name.setText(dateCliente.getName());
+            cpf.setText(dateCliente.getCpf());
+            email.setText(dateCliente.getEmail());
+            age.setText(dateCliente.getAge());
+            telephone.setText(dateCliente.getTelephone());
+        }
+        enableButton();
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -28,6 +54,7 @@ public class RegisterActivity extends AppCompatActivity implements Structure {
         initializeUI();
         setupListeners();
         spinnerAdapter();
+        onResume();
     }
 
     @Override
@@ -48,9 +75,9 @@ public class RegisterActivity extends AppCompatActivity implements Structure {
         buttonNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(checkFields()){
+                if (checkFields()) {
                     disableButton();
-                    if (sex.getSelectedItemPosition() == 0) {
+                    if (sex.getSelectedItem().toString() != "Selecione") {
                         Intent nextScrenn = new Intent(RegisterActivity.this, RegisterAddress.class);
                         nextScrenn.putExtra("cliente", new ClienteModel(name.getText().toString(), cpf.getText().toString(), Integer.parseInt(age.getText().toString()), email.getText().toString(), telephone.getText().toString(), sex.getSelectedItem().toString()));
                         startActivity(nextScrenn);
@@ -91,28 +118,33 @@ public class RegisterActivity extends AppCompatActivity implements Structure {
         sex.setAdapter(adapter);
     }
 
-    private String[] getSex() {
+        private String[] getSex() {
         return new String[]{"Selecione", "Masculino", "Feminino"};
     }
-    private boolean checkFields(){
-        if(name.length() <= 2 ){
+    private boolean checkFields() {
+
+        if (name.length() <= 2) {
             name.setError("Nome invalido");
             return false;
         }
-        if(cpf.length() <= 7){
+        if (cpf.length() <= 7) {
             cpf.setError("Cpf deve possuir 8 numeros");
             return false;
         }
-        if(Integer.parseInt(age.getText().toString()) <= 17){
+        if (Integer.parseInt(age.getText().toString()) <= 17) {
             age.setText("O Usuário deve possuir 18 anos ou mais");
             return false;
         }
         String emailCoppy = email.getText().toString();
-        if(email.length() <= 15 ||emailCoppy.contains("@")){
-            email.setError("Email invalido");
+        if (email.length() <= 15) {
+            if (!emailCoppy.contains("@")) {
+                email.setError("Email invalido");
+                return false;
+            }
+            email.setError("Email deve possuir 15 caracteres");
             return false;
         }
-        if(telephone.length() <= 7){
+        if (telephone.length() <= 7) {
             telephone.setError("Telefone invalido");
         }
         return true;

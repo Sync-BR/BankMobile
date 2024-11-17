@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bank.offbank.R;
@@ -22,12 +23,20 @@ public class MainActivity extends AppCompatActivity implements Structure {
     private UsuriousService userService;
     private Button register, login;
     private EditText username, password;
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        enableButton();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initializeUI();
         setupListeners();
+        onResume();
     }
     @Override
     public void initializeUI() {
@@ -74,7 +83,6 @@ public class MainActivity extends AppCompatActivity implements Structure {
                 disableButton();
                 Intent registerScrenn = new Intent(MainActivity.this, RegisterActivity.class);
                 startActivity(registerScrenn);
-                finish();
             }
         });
     }

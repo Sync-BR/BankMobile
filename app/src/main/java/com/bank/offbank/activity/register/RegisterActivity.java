@@ -3,6 +3,7 @@ package com.bank.offbank.activity.register;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -38,11 +39,20 @@ public class RegisterActivity extends AppCompatActivity implements Structure {
     protected void onResume() {
         super.onResume();
         if (returnDate()) {
+            System.out.println("Age: " +age.getText());
             name.setText(dateCliente.getName());
             cpf.setText(dateCliente.getCpf());
             email.setText(dateCliente.getEmail());
-            age.setText(dateCliente.getAge());
+            age.setText(String.valueOf(dateCliente.getAge()));
+            Log.d("Log cliente", "Valores obtidos: " +dateCliente);
             telephone.setText(dateCliente.getTelephone());
+            if (dateCliente.getSex().equals("Masculino")) {
+                sex.setSelection(1);
+            } else if(dateCliente.getSex().equals("Feminino")){
+                sex.setSelection(2);
+            } else {}
+            sex.setSelection(0);
+
         }
         enableButton();
     }
@@ -118,9 +128,10 @@ public class RegisterActivity extends AppCompatActivity implements Structure {
         sex.setAdapter(adapter);
     }
 
-        private String[] getSex() {
+    private String[] getSex() {
         return new String[]{"Selecione", "Masculino", "Feminino"};
     }
+
     private boolean checkFields() {
 
         if (name.length() <= 2) {

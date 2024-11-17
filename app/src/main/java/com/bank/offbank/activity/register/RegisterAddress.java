@@ -26,6 +26,7 @@ public class RegisterAddress extends AppCompatActivity implements Structure {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.acitivity_register_cep);
         initializeUI();
+        setupListeners();
         getDateCliente();
         Log.d("Collect: " ,"Cliente coletado" +cliente);
 
@@ -44,13 +45,13 @@ public class RegisterAddress extends AppCompatActivity implements Structure {
         state = findViewById(R.id.register_cep_state);
         search = findViewById(R.id.register_cep_search);
         buttonNext = findViewById(R.id.register_next_1);
-        buttonReturn = findViewById(R.id.returnScreen);
+        buttonReturn = findViewById(R.id.returnScreenCep);
 
     }
 
     @Override
     public void setupListeners() {
-        buttonNext.setOnClickListener(new View.OnClickListener() {
+        search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 disableButton();
@@ -67,10 +68,11 @@ public class RegisterAddress extends AppCompatActivity implements Structure {
         buttonReturn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                Log.d("Resposta", "Botão clicado");
                 Intent screenReturn = new Intent(RegisterAddress.this, RegisterActivity.class);
                 screenReturn.putExtra("cliente", cliente);
                 startActivity(screenReturn);
-                finish();
             }
         });
 

@@ -117,7 +117,7 @@
         android:text="@string/register_button_next" />
 
     <Button
-        android:id="@+id/returnScreen"
+        android:id="@+id/returnScreenCep"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/cardview_dark_background"

@@ -14,13 +14,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bank.offbank.R;
 import com.bank.offbank.implementation.Structure;
+import com.bank.offbank.model.AddressModel;
 import com.bank.offbank.model.ClienteModel;
+import com.bank.offbank.util.CepQuery;
 
 public class RegisterAddress extends AppCompatActivity implements Structure {
     private EditText cep, houseNumber, houseLetter;
     private TextView road, neighborhood, locality, state;
     private Button buttonNext, buttonReturn, search;
-    private ClienteModel cliente;
+    private ClienteModel client;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,8 +31,7 @@ public class RegisterAddress extends AppCompatActivity implements Structure {
         initializeUI();
         setupListeners();
         getDateCliente();
-        Log.d("Collect: " ,"Cliente coletado" +cliente);
-
+        Log.d("Collect: ", "Cliente coletado" + client);
 
 
     }
@@ -44,7 +46,7 @@ public class RegisterAddress extends AppCompatActivity implements Structure {
         locality = findViewById(R.id.register_cep_locality);
         state = findViewById(R.id.register_cep_state);
         search = findViewById(R.id.register_cep_search);
-        buttonNext = findViewById(R.id.register_next_1);
+        buttonNext = findViewById(R.id.register_cep_next);
         buttonReturn = findViewById(R.id.returnScreenCep);
 
     }
@@ -54,25 +56,39 @@ public class RegisterAddress extends AppCompatActivity implements Structure {
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                disableButton();
+                if (cep.length() == 8) {
+                    new Thread(() -> {
+                        CepQuery searchCep = new CepQuery();
+                        AddressModel addres = searchCep.searchZipCode(cep.getText().toString());
+                        road.setText(addres.getLogradouro());
+                        neighborhood.setText(addres.getBairro());
+                        locality.setText(addres.getLocalidade());
+                        state.setText(addres.getUf());
+                    }).start();
 
-                if(cep.length() == 8){
-                    //Metado para buscar um cep e prencher os dados no form data
                 } else {
-                    enableButton();
                     Toast.makeText(RegisterAddress.this, "Cep invalido!", Toast.LENGTH_SHORT).show();
                     cep.setError("O Cep precisar conter 8 digitos");
+                }
+            }
+        });
+        buttonNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                disableButton();
+                if (checkDate()) {
+                    Intent scrennLogin = new Intent(RegisterAddress.this, RegisterLogin.class);
+                    scrennLogin.putExtra("cliente", new ClienteModel(client.getName(), client.getCpf(), client.getAge(), client.getEmail(), client.getTelephone(), cep.getText().toString(), Integer.parseInt(houseNumber.getText().toString()), houseLetter.getText().toString().charAt(0), client.getSex()));
+                    startActivity(scrennLogin);
+                } else {
+                    enableButton();
                 }
             }
         });
         buttonReturn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Log.d("Resposta", "Botão clicado");
-                Intent screenReturn = new Intent(RegisterAddress.this, RegisterActivity.class);
-                screenReturn.putExtra("cliente", cliente);
-                startActivity(screenReturn);
+                finish();
             }
         });
 
@@ -90,9 +106,22 @@ public class RegisterAddress extends AppCompatActivity implements Structure {
         buttonNext.setEnabled(true);
         buttonReturn.setEnabled(true);
     }
-    private void getDateCliente(){
+
+    private boolean checkDate() {
+        if (houseNumber.getText().length() != 2) {
+            houseNumber.setError("Número invalido!");
+            return false;
+        }
+        if (houseLetter.getText().length() != 1) {
+            houseLetter.setError("Letra da casa invalida!");
+            return false;
+        }
+        return true;
+    }
+
+    private void getDateCliente() {
         Intent getDate = getIntent();
-        this.cliente = (ClienteModel) getDate.getSerializableExtra("cliente");
+        this.client = (ClienteModel) getDate.getSerializableExtra("cliente");
     }
 
 }

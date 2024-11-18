@@ -24,8 +24,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.register.RegisterActivity"/>
-        <activity android:name=".activity.register.RegisterAddress"/>
+        <activity android:name=".activity.register.RegisterActivity" android:launchMode="singleTop"/>
+        <activity android:name=".activity.register.RegisterAddress" android:launchMode="singleTop"/>
+        <activity android:name=".activity.register.RegisterLogin" android:launchMode="singleTop"/>
     </application>
 
 </manifest>

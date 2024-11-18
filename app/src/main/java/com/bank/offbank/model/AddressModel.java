@@ -1,6 +1,8 @@
 package com.bank.offbank.model;
 
-public class AddressModel {
+import java.io.Serializable;
+
+public class AddressModel implements Serializable {
     private String cep;
     private String logradouro;
     private String complemento;

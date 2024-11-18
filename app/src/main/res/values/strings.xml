@@ -62,4 +62,7 @@
     <string name="register_cep_state">Estado</string>
     <string name="register_cep_houseNumber">Número do ap</string>
     <string name="register_cep_house_letter">Letra</string>
+    <string name="login_user">Nome do usuário</string>
+    <string name="login_password">Senha</string>
+    <string name="login_repeat_password">Repita a senha</string>
 </resources>

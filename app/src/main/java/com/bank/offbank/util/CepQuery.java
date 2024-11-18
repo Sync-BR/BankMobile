@@ -14,7 +14,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class CepQuery {
-    private final static String url = "https://viacep.com.br/ws/";
+    private final  String url = "https://viacep.com.br/ws/";
     public AddressModel searchZipCode(String cep) {
         String endPoint = url + cep + "/json/";
         OkHttpClient client = new OkHttpClient();

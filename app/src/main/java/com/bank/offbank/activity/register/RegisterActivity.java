@@ -39,19 +39,19 @@ public class RegisterActivity extends AppCompatActivity implements Structure {
     protected void onResume() {
         super.onResume();
         if (returnDate()) {
-            System.out.println("Age: " +age.getText());
             name.setText(dateCliente.getName());
             cpf.setText(dateCliente.getCpf());
             email.setText(dateCliente.getEmail());
             age.setText(String.valueOf(dateCliente.getAge()));
-            Log.d("Log cliente", "Valores obtidos: " +dateCliente);
+            Log.d("Log cliente", "Valores obtidos: " + dateCliente);
             telephone.setText(dateCliente.getTelephone());
             if (dateCliente.getSex().equals("Masculino")) {
                 sex.setSelection(1);
-            } else if(dateCliente.getSex().equals("Feminino")){
+            } else if (dateCliente.getSex().equals("Feminino")) {
                 sex.setSelection(2);
-            } else {}
-            sex.setSelection(0);
+            } else {
+                sex.setSelection(0);
+            }
 
         }
         enableButton();
@@ -101,6 +101,8 @@ public class RegisterActivity extends AppCompatActivity implements Structure {
         buttonReturn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent screenMain = new Intent(RegisterActivity.this, MainActivity.class);
+                startActivity(screenMain);
                 finish();
             }
         });
@@ -143,7 +145,7 @@ public class RegisterActivity extends AppCompatActivity implements Structure {
             return false;
         }
         if (Integer.parseInt(age.getText().toString()) <= 17) {
-            age.setText("O Usuário deve possuir 18 anos ou mais");
+            age.setError("O Usuário deve possuir 18 anos ou mais");
             return false;
         }
         String emailCoppy = email.getText().toString();

@@ -17,6 +17,7 @@ public class ClienteModel implements Serializable {
     private String photo;
     private LoginModel login;
 
+
     public ClienteModel(String name, String cpf, int age, String email, String telephone, String sex) {
         this.name = name;
         this.cpf = cpf;
@@ -26,10 +27,16 @@ public class ClienteModel implements Serializable {
         this.sex = sex;
     }
 
-    public ClienteModel(String cep, int houseNumber, char houseLetter) {
+    public ClienteModel(String name, String cpf, int age, String email, String telephone, String cep, int houseNumber, char houseLetter, String sex) {
+        this.name = name;
+        this.cpf = cpf;
+        this.age = age;
+        this.email = email;
+        this.telephone = telephone;
         this.cep = cep;
         this.houseNumber = houseNumber;
         this.houseLetter = houseLetter;
+        this.sex = sex;
     }
 
     @Override

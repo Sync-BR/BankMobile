@@ -39,6 +39,19 @@ public class ClienteModel implements Serializable {
         this.sex = sex;
     }
 
+    public ClienteModel(ClienteModel clienteModel, LoginModel login) {
+        this.name = clienteModel.getName();
+        this.cpf = clienteModel.getCpf();
+        this.age = clienteModel.getAge();
+        this.email = clienteModel.getEmail();
+        this.telephone = clienteModel.getTelephone();
+        this.cep = clienteModel.getCep();
+        this.houseNumber = clienteModel.getHouseNumber();
+        this.houseLetter = clienteModel.getHouseLetter();
+        this.sex = clienteModel.getSex();
+        this.login = login;
+    }
+
     @Override
     public String toString() {
         return "ClienteModel{" +

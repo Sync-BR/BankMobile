@@ -1,8 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/gradient_background"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="16dp"
     tools:context=".activity.register.RegisterLogin">
 
+    <EditText
+        android:id="@+id/register_login_user"
+        style="@style/TextAppearance.AppCompat.Title"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginBottom="5dp"
+        android:background="@color/white"
+        android:gravity="center"
+        android:hint="@string/login_user" />
+
+    <EditText
+        android:id="@+id/register_login_password"
+        style="@style/TextAppearance.AppCompat.Title"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginBottom="5dp"
+        android:background="@color/white"
+        android:gravity="center"
+        android:hint="@string/login_password" />
+
+    <EditText
+        android:id="@+id/register_repeat_password"
+        style="@style/TextAppearance.AppCompat.Title"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginBottom="5dp"
+        android:background="@color/white"
+        android:gravity="center"
+        android:hint="@string/login_repeat_password" />
+    <Button
+        android:id="@+id/register_login_next"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/cardview_dark_background"
+        android:backgroundTint="@color/cardview_dark_background"
+        android:text="@string/register_button_next"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="5dp"/>
+    <Button
+        android:id="@+id/return_login_screen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/cardview_dark_background"
+        android:backgroundTint="@color/cardview_dark_background"
+        android:text="@string/return_Screen" />
 </LinearLayout>

@@ -1,6 +1,8 @@
 package com.bank.offbank.model;
 
-public class LoginModel {
+import java.io.Serializable;
+
+public class LoginModel implements Serializable {
 
     private int id;
     private String username;

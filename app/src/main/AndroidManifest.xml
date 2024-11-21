@@ -3,6 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools">
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera" android:required="true" />
+    <uses-feature android:name="android.hardware.camera.front" android:required="true"/>
+    <uses-feature android:name="android.hardware.camera" android:required="true"/>
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -14,19 +19,24 @@
         android:theme="@style/Theme.OFFBank"
         tools:targetApi="31"
         android:networkSecurityConfig="@xml/network_security_config">
-        >
+
+
         <activity
             android:name=".activity.MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.OFFBank">
+            android:theme="@style/Theme.OFFBank"
+
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <activity android:name=".activity.register.RegisterActivity" android:launchMode="singleTop"/>
         <activity android:name=".activity.register.RegisterAddress" android:launchMode="singleTop"/>
         <activity android:name=".activity.register.RegisterLogin" android:launchMode="singleTop"/>
+        <activity android:name=".activity.register.RegisterPhoto" android:launchMode="singleTop"/>
     </application>
 
 </manifest>

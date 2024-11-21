@@ -65,4 +65,8 @@
     <string name="login_user">Nome do usuário</string>
     <string name="login_password">Senha</string>
     <string name="login_repeat_password">Repita a senha</string>
+    <string name="face_frame_description">Foto do rosto</string>
+    <string name="register_photo_next">Próximo</string>
+    <string name="register_photo_capture">Capturar foto</string>
+    <string name="photo_preview">descrição</string>
 </resources>

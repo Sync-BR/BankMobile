@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bank.offbank.R;
 import com.bank.offbank.activity.register.RegisterActivity;
+import com.bank.offbank.activity.register.RegisterPhoto;
 import com.bank.offbank.callback.AuthCallBack;
 import com.bank.offbank.implementation.Structure;
 import com.bank.offbank.model.LoginModel;
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements Structure {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         initializeUI();
         setupListeners();
         onResume();

@@ -60,10 +60,11 @@ public class RegisterLogin extends AppCompatActivity implements Structure {
                                         repeatPassword.setError("Senhas diferentes!");
                                     } else {
                                         Intent screenPhoto = new Intent(RegisterLogin.this, RegisterPhoto.class);
-                                        client = getLoginDetails(client);
+                                        setLoginDetails();
                                         Log.d("Dados", "Dados do cliente: " + client);
                                         screenPhoto.putExtra("cliente", client);
                                         startActivity(screenPhoto);
+                                        finish();
                                     }
                                 }
                             });
@@ -114,8 +115,8 @@ public class RegisterLogin extends AppCompatActivity implements Structure {
         return true;
     }
     //Get login details
-    private ClienteModel getLoginDetails(ClienteModel client){
+    private void setLoginDetails(){
         LoginModel addLogin = new LoginModel(username.getText().toString(), password.getText().toString());
-        return new ClienteModel(client,addLogin);
+        this.client.setLogin(addLogin);
     }
 }

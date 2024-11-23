@@ -43,24 +43,12 @@ public class RegisterPhoto extends AppCompatActivity implements Structure {
     private PreviewView previewPhoto;
     private ImageView photoPreview, frame;
     private ExecutorService executorService;
-    private Button buttonNext;
+    private Button buttonNext, buttonTakePhoto;
     private FaceDetector faceDetector;
     private boolean isPhotoTaken = false;
 
-
-    private ClienteModel getDateIntent() {
-        Intent getDate = getIntent();
-        return (ClienteModel) getDate.getSerializableExtra("cliente");
-    }
-
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register_photo);
+    private void init() {
         this.client = getDateIntent();
-        initializeUI();
-        setupListeners();
-        checkPermission();
         executorService = Executors.newSingleThreadExecutor();
         FaceDetectorOptions options = new FaceDetectorOptions.Builder()
                 .setPerformanceMode(FaceDetectorOptions.PERFORMANCE_MODE_FAST)
@@ -69,34 +57,6 @@ public class RegisterPhoto extends AppCompatActivity implements Structure {
                 .build();
         faceDetector = FaceDetection.getClient(options);
     }
-
-
-    @Override
-    public void initializeUI() {
-        previewPhoto = findViewById(R.id.previewPhoto);
-        photoPreview = findViewById(R.id.photoPreview);
-        frame = findViewById(R.id.frameOverlay);
-        buttonNext = findViewById(R.id.register_photo_next);
-
-        photoPreview.setVisibility(View.GONE);
-        buttonNext.setVisibility(View.GONE);
-    }
-
-    @Override
-    public void setupListeners() {
-        buttonNext.setOnClickListener(view -> {
-
-        });
-    }
-
-    @Override
-    public void disableButton() {
-    }
-
-    @Override
-    public void enableButton() {
-    }
-
 
     private void checkPermission() {
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA)
@@ -109,13 +69,67 @@ public class RegisterPhoto extends AppCompatActivity implements Structure {
         }
     }
 
+    private ClienteModel getDateIntent() {
+        Intent getDate = getIntent();
+        return (ClienteModel) getDate.getSerializableExtra("cliente");
+    }
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_register_photo);
+        initializeUI();
+        setupListeners();
+        checkPermission();
+        init();
+    }
+
+
+    @Override
+    public void initializeUI() {
+        previewPhoto = findViewById(R.id.previewPhoto);
+        photoPreview = findViewById(R.id.photoPreview);
+        frame = findViewById(R.id.frameOverlay);
+        buttonTakePhoto = findViewById(R.id.register_photo_capture);
+        buttonNext = findViewById(R.id.register_photo_next);
+    }
+
+    @Override
+    public void setupListeners() {
+        buttonTakePhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                isPhotoTaken = false;
+                previewPhoto.setVisibility(View.VISIBLE);
+                frame.setVisibility(View.VISIBLE);
+                photoPreview.setVisibility(View.VISIBLE);
+                startCamera();
+
+            }
+        });
+        buttonNext.setOnClickListener(view -> {
+            Intent screenTerms = new Intent(RegisterPhoto.this, RegisterTerms.class);
+            screenTerms.putExtra("cliente", client);
+            startActivity(screenTerms);
+            finish();
+        });
+    }
+
+    @Override
+    public void disableButton() {
+    }
+
+    @Override
+    public void enableButton() {
+    }
+
+
     @OptIn(markerClass = ExperimentalGetImage.class)
     private void startCamera() {
         ListenableFuture<ProcessCameraProvider> cameraProviderFuture = ProcessCameraProvider.getInstance(this);
         cameraProviderFuture.addListener(() -> {
             try {
                 ProcessCameraProvider cameraProvider = cameraProviderFuture.get();
-
                 CameraSelector cameraSelector = new CameraSelector.Builder()
                         .requireLensFacing(CameraSelector.LENS_FACING_FRONT)
                         .build();
@@ -135,8 +149,7 @@ public class RegisterPhoto extends AppCompatActivity implements Structure {
                                         if (isFaceAligned(face)) {
                                             if (!isPhotoTaken) {
                                                 isPhotoTaken = true;
-                                                // Delay de 1 segundo antes de capturar a foto
-                                                new Handler().postDelayed(() -> runOnUiThread(this::takePhoto), 1000);
+                                                new Handler().postDelayed(() -> runOnUiThread(this::takePhoto), 5000);
                                             }
                                         }
                                     }
@@ -164,7 +177,13 @@ public class RegisterPhoto extends AppCompatActivity implements Structure {
     }
 
     private void takePhoto() {
-        File photoFile = new File(getExternalFilesDir(null), "photo.jpg");
+        if (client != null) {
+            String fileName = "photo_" + client.getName() + ".jpeg";
+            this.client.setPhoto(fileName);
+            Log.d("Log archive", "Nome do arquivo" + client);
+            //Desenvolver lógica parae enviar a imagem ou armazenar
+            File photoFile = new File(getExternalFilesDir(null), fileName);
+        }
         Bitmap bitmap = previewPhoto.getBitmap();
         if (bitmap != null) {
             runOnUiThread(() -> {

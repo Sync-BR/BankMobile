@@ -45,9 +45,9 @@ public class RegisterActivity extends AppCompatActivity implements Structure {
             age.setText(String.valueOf(dateCliente.getAge()));
             Log.d("Log cliente", "Valores obtidos: " + dateCliente);
             telephone.setText(dateCliente.getTelephone());
-            if (dateCliente.getSex().equals("Masculino")) {
+            if (dateCliente.getSex() == 1) {
                 sex.setSelection(1);
-            } else if (dateCliente.getSex().equals("Feminino")) {
+            } else if (dateCliente.getSex() == 2) {
                 sex.setSelection(2);
             } else {
                 sex.setSelection(0);
@@ -86,10 +86,12 @@ public class RegisterActivity extends AppCompatActivity implements Structure {
             @Override
             public void onClick(View view) {
                 if (checkFields()) {
+                    //Verificar se o email já está existente no banco de dados!
                     disableButton();
                     if (sex.getSelectedItem().toString() != "Selecione") {
                         Intent nextScrenn = new Intent(RegisterActivity.this, RegisterAddress.class);
-                        nextScrenn.putExtra("cliente", new ClienteModel(name.getText().toString(), cpf.getText().toString(), Integer.parseInt(age.getText().toString()), email.getText().toString(), telephone.getText().toString(), sex.getSelectedItem().toString()));
+                        nextScrenn.putExtra("cliente", new ClienteModel(name.getText().toString(), cpf.getText().toString(), Integer.parseInt(age.getText().toString()), email.getText().toString(), telephone.getText().toString(), sex.getSelectedItemPosition()));
+
                         startActivity(nextScrenn);
                     } else {
                         enableButton();

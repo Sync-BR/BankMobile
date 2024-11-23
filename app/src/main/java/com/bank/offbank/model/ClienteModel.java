@@ -13,12 +13,12 @@ public class ClienteModel implements Serializable {
     private String cep;
     private int houseNumber;
     private char houseLetter;
-    private String sex;
+    private int sex;
     private String photo;
     private LoginModel login;
 
 
-    public ClienteModel(String name, String cpf, int age, String email, String telephone, String sex) {
+    public ClienteModel(String name, String cpf, int age, String email, String telephone, int sex) {
         this.name = name;
         this.cpf = cpf;
         this.age = age;
@@ -27,7 +27,7 @@ public class ClienteModel implements Serializable {
         this.sex = sex;
     }
 
-    public ClienteModel(String name, String cpf, int age, String email, String telephone, String cep, int houseNumber, char houseLetter, String sex) {
+    public ClienteModel(String name, String cpf, int age, String email, String telephone, String cep, int houseNumber, char houseLetter, int sex) {
         this.name = name;
         this.cpf = cpf;
         this.age = age;
@@ -143,11 +143,11 @@ public class ClienteModel implements Serializable {
         this.houseLetter = houseLetter;
     }
 
-    public String getSex() {
+    public int getSex() {
         return sex;
     }
 
-    public void setSex(String sex) {
+    public void setSex(int sex) {
         this.sex = sex;
     }
 

@@ -37,6 +37,7 @@
         <activity android:name=".activity.register.RegisterAddress" android:launchMode="singleTop"/>
         <activity android:name=".activity.register.RegisterLogin" android:launchMode="singleTop"/>
         <activity android:name=".activity.register.RegisterPhoto" android:launchMode="singleTop"/>
+        <activity android:name=".activity.register.RegisterTerms" android:launchMode="singleTop"/>
     </application>
 
 </manifest>

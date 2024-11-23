@@ -24,6 +24,7 @@
         style="@style/TextAppearance.AppCompat.Title"
         android:layout_width="match_parent"
         android:layout_height="48dp"
+        android:inputType="textPassword"
         android:layout_marginBottom="5dp"
         android:background="@color/white"
         android:gravity="center"
@@ -35,6 +36,7 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginBottom="5dp"
+        android:inputType="textPassword"
         android:background="@color/white"
         android:gravity="center"
         android:hint="@string/login_repeat_password" />

@@ -95,7 +95,6 @@ public class RegisterTerms extends AppCompatActivity  implements Structure {
     }
     private ClienteModel getClientDate(){
         Log.d("Resposta", "Cliente" +client );
-        System.out.println("Dados do cliente " +client);
         Intent getDateClient = getIntent();
         return (ClienteModel) getDateClient.getSerializableExtra("cliente");
     };

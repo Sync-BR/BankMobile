@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bank.offbank.R;
+import com.bank.offbank.activity.main.HomemActivity;
 import com.bank.offbank.activity.register.RegisterActivity;
 import com.bank.offbank.activity.register.RegisterPhoto;
 import com.bank.offbank.callback.AuthCallBack;
@@ -61,6 +62,8 @@ public class MainActivity extends AppCompatActivity implements Structure {
                         public void onAuthSuccess(String token) {
                             Toast.makeText(MainActivity.this, "Usuário autenticado com sucesso!", Toast.LENGTH_SHORT).show();
                             Log.d("Token: ", " do usuario " + token);
+                            Intent screenHome = new Intent(MainActivity.this, HomemActivity.class);
+                            startActivity(screenHome);
                         }
 
                         @Override

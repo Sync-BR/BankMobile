@@ -27,7 +27,8 @@ public class RegisterTerms extends AppCompatActivity  implements Structure {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         serviceRegister = new RegisterService(this);
-        this.client = getClientDate();
+        Intent getDateClient = getIntent();
+        this.client = (ClienteModel) getDateClient.getSerializableExtra("client");
         setContentView(R.layout.activity_register_terms);
         initializeUI();
         setupListeners();
@@ -93,9 +94,9 @@ public class RegisterTerms extends AppCompatActivity  implements Structure {
         }
         return false;
     }
-    private ClienteModel getClientDate(){
-        Log.d("Resposta", "Cliente" +client );
+    private void getClientDate() {
         Intent getDateClient = getIntent();
-        return (ClienteModel) getDateClient.getSerializableExtra("cliente");
-    };
+        this.client = (ClienteModel) getDateClient.getSerializableExtra("client");
+
+    }
 }

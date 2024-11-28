@@ -16,6 +16,7 @@ public class ClienteModel implements Serializable {
     private int sex;
     private String photo;
     private LoginModel login;
+    private CoinsModel coins;
 
 
     public ClienteModel(String name, String cpf, int age, String email, String telephone, int sex) {
@@ -39,7 +40,7 @@ public class ClienteModel implements Serializable {
         this.sex = sex;
     }
 
-    public ClienteModel(ClienteModel clienteModel, LoginModel login) {
+    public ClienteModel(ClienteModel clienteModel, LoginModel login, CoinsModel coins) {
         this.name = clienteModel.getName();
         this.cpf = clienteModel.getCpf();
         this.age = clienteModel.getAge();
@@ -50,7 +51,24 @@ public class ClienteModel implements Serializable {
         this.houseLetter = clienteModel.getHouseLetter();
         this.sex = clienteModel.getSex();
         this.login = login;
+        this.coins = coins;
     }
+
+    public ClienteModel(ClienteModel client) {
+        this.name = client.getName();
+        this.cpf = client.getCpf();
+        this.age = client.getAge();
+        this.email = client.getEmail();
+        this.telephone = client.getTelephone();
+        this.cep = client.getCep();
+        this.houseNumber = client.getHouseNumber();
+        this.houseLetter = client.getHouseLetter();
+        this.sex = client.getSex();
+        this.photo = client.getPhoto();
+        this.login = client.getLogin();
+        this.coins = client.getCoins();
+    }
+
 
     @Override
     public String toString() {
@@ -64,12 +82,12 @@ public class ClienteModel implements Serializable {
                 ", cep='" + cep + '\'' +
                 ", houseNumber=" + houseNumber +
                 ", houseLetter=" + houseLetter +
-                ", sex='" + sex + '\'' +
+                ", sex=" + sex +
                 ", photo='" + photo + '\'' +
                 ", login=" + login +
+                ", coins=" + coins +
                 '}';
     }
-
 
     public int getId() {
         return id;
@@ -165,5 +183,13 @@ public class ClienteModel implements Serializable {
 
     public void setLogin(LoginModel login) {
         this.login = login;
+    }
+
+    public CoinsModel getCoins() {
+        return coins;
+    }
+
+    public void setCoins(CoinsModel coins) {
+        this.coins = coins;
     }
 }

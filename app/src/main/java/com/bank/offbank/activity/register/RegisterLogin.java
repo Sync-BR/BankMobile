@@ -15,6 +15,7 @@ import com.bank.offbank.R;
 import com.bank.offbank.callback.register.VerifyUserNameCallBack;
 import com.bank.offbank.implementation.Structure;
 import com.bank.offbank.model.ClienteModel;
+import com.bank.offbank.model.CoinsModel;
 import com.bank.offbank.model.LoginModel;
 import com.bank.offbank.service.checkdate.CheckLogin;
 
@@ -61,8 +62,7 @@ public class RegisterLogin extends AppCompatActivity implements Structure {
                                     } else {
                                         Intent screenPhoto = new Intent(RegisterLogin.this, RegisterPhoto.class);
                                         setLoginDetails();
-                                        Log.d("Dados", "Dados do cliente: " + client);
-                                        screenPhoto.putExtra("cliente", client);
+                                        screenPhoto.putExtra("clients", client);
                                         startActivity(screenPhoto);
                                         finish();
                                     }
@@ -76,9 +76,7 @@ public class RegisterLogin extends AppCompatActivity implements Structure {
                             Toast.makeText(RegisterLogin.this, "Erro na solicitação do servidor!", Toast.LENGTH_SHORT).show();
                         }
                     });
-                    Intent screenTerms = new Intent(RegisterLogin.this, RegisterPhoto.class);
-                    screenTerms.putExtra("cliente", client);
-                    startActivity(screenTerms);
+
                 }
             }
         });
@@ -116,7 +114,10 @@ public class RegisterLogin extends AppCompatActivity implements Structure {
     }
     //Get login details
     private void setLoginDetails(){
-        LoginModel addLogin = new LoginModel(username.getText().toString(), password.getText().toString());
-        this.client.setLogin(addLogin);
+        CoinsModel coins = new CoinsModel(0.0,0.0);
+        LoginModel login = new LoginModel(username.getText().toString(), password.getText().toString());
+        client.setLogin(login);
+        client.setCoins(coins);
+
     }
 }

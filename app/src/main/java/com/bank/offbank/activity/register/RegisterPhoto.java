@@ -48,7 +48,6 @@ public class RegisterPhoto extends AppCompatActivity implements Structure {
     private boolean isPhotoTaken = false;
 
     private void init() {
-        this.client = getDateIntent();
         executorService = Executors.newSingleThreadExecutor();
         FaceDetectorOptions options = new FaceDetectorOptions.Builder()
                 .setPerformanceMode(FaceDetectorOptions.PERFORMANCE_MODE_FAST)
@@ -70,18 +69,20 @@ public class RegisterPhoto extends AppCompatActivity implements Structure {
     }
 
     private ClienteModel getDateIntent() {
-        Intent getDate = getIntent();
-        return (ClienteModel) getDate.getSerializableExtra("cliente");
+        Intent getDateCliente = getIntent();
+        return (ClienteModel) getDateCliente.getSerializableExtra("client");
     }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_photo);
+        init();
+        Intent getDateCliente = getIntent();
+        this.client = (ClienteModel) getDateCliente.getSerializableExtra("clients");
         initializeUI();
         setupListeners();
         checkPermission();
-        init();
     }
 
 
@@ -109,9 +110,9 @@ public class RegisterPhoto extends AppCompatActivity implements Structure {
         });
         buttonNext.setOnClickListener(view -> {
             Intent screenTerms = new Intent(RegisterPhoto.this, RegisterTerms.class);
-            screenTerms.putExtra("cliente", client);
+            screenTerms.putExtra("client", new ClienteModel(client));
             startActivity(screenTerms);
-            finish();
+//            finish();
         });
     }
 

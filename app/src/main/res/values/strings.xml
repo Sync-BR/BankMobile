@@ -84,4 +84,7 @@
     <string name="card_live">Limite livre</string>
     <string name="card_count">Total de limite</string>
     <string name="home_wellcome">Bem vindo(a)  Eduardo Freitas</string>
+    <string name="home_loan">Emprestimo</string>
+    <string name="home_loan_description">Gerencie seus empréstimos de forma prática! Nosso aplicativo permite registrar, acompanhar prazos e valores, garantindo total controle e organização financeira.</string>
+    <string name="home_lean_button">Solicitar emprestimo</string>
 </resources>
